@@ -1,7 +1,6 @@
 #丢av号文件夹下面运行 
 #by Misaka14375
-Write-Host '检查一下，脚本要丢av号文件夹下面运行 按任意按键继续' -NoNewline
-$null = [Console]::ReadKey('?')
+$null = Read-Host "检查一下，脚本要丢av号文件夹下面运行 按任意按键继续"
 $currentPath=Split-Path -Parent $MyInvocation.MyCommand.Definition #当前文件夹
 $foo =($currentPath).Split('\\') 
 $av=$foo[$foo.Count-1] #av号
