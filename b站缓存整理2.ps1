@@ -13,7 +13,7 @@ ForEach-Object{
     $newName = 'av{0}-p{1}-{2}' -f $av,$partNumber,$_.Name.Replace(".blv",".flv")
  #   $newName = 'av{0}-p{1}-{2}' -f $av,$partNumber,$_.Name
     Rename-Item -Path $_.FullName -NewName $newName
-    Move-Item $newName -Destination ../../
+    Move-Item $newName -Destination ../
 }
 cd $currentPath
 
