@@ -4,12 +4,14 @@ $null = Read-Host "检查一下，脚本要丢av号文件夹下面运行 按任�
 $currentPath=Split-Path -Parent $MyInvocation.MyCommand.Definition #当前文件夹
 $foo =($currentPath).Split('\\') 
 $av=$foo[$foo.Count-1] #av号
+#Get-ChildItem -Filter *.flv -Recurse |
 Get-ChildItem -Filter *.blv -Recurse |
 ForEach-Object{
     $bar=($_.DirectoryName).Split('\\')
     $partNumber=$bar[$bar.Count-2] #分p号
     cd $_.DirectoryName
     $newName = 'av{0}-p{1}-{2}' -f $av,$partNumber,$_.Name.Replace(".blv",".flv")
+ #   $newName = 'av{0}-p{1}-{2}' -f $av,$partNumber,$_.Name
     Rename-Item -Path $_.FullName -NewName $newName
     Move-Item $newName -Destination ../../
 }
