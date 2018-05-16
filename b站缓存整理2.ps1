@@ -1,8 +1,8 @@
 #丢av号文件夹下面运行 
 #by Misaka14375
-$null = Read-Host "Choose 0 or 1 //Android[0] UWP[1]"
+$type = Read-Host "Choose 0 or 1 //Android[0] UWP[1]"
 $currentPath=Split-Path -Parent $MyInvocation.MyCommand.Definition #当前文件夹
-if($Name -eq "0")
+if($type -eq "0")
 {
     $foo =($currentPath).Split('\\') 
     $av=$foo[$foo.Count-1] #av号
