@@ -11,13 +11,13 @@ if($Name -eq "y")
         $shellfile = $shellfolder.ParseName($file.Name)
         $date=$shellfolder.GetDetailsOf($shellfile, 12).Replace('/','-').Split(' ') #获取拍摄日期
 
-        if($date[4] -eq $null)
+        if($date[0] -eq “”)
         {
             "{0} 该文件没有拍摄日期" -f $file.Name
         }
         else
         {
-            $newName = '{0}-{1} {2}' -f $date[0],$date[4].Replace(':','.'),$file.Name
+            $newName = '{0}_{1}_{2}' -f $date[0],$date[2].Replace(':','.'),$file.Name
             Rename-Item -LiteralPath $file.Name -NewName $newName
         }
     }
