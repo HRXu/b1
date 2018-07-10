@@ -17,7 +17,7 @@ if($Name -eq "y")
         }
         else
         {
-            $newName = '{0}_{1}_{2}' -f $date[0],$date[2].Replace(':','.'),$file.Name
+            $newName = '{0}_{1} {2}' -f $date[0],$date[2].Replace(':','.'),$file.Name
             Rename-Item -LiteralPath $file.Name -NewName $newName
         }
     }
