@@ -1,6 +1,6 @@
 #丢av号文件夹下面运行 
 #需要安装ffmpeg 添加环境变量
-#按p整理，安装版滋瓷合并分段
+#按p整理，安卓版滋瓷合并分段
 #用前备份
 $type = Read-Host "Choose 0 or 1 //Android[0] UWP[1]"
 $currentPath=Split-Path -Parent $MyInvocation.MyCommand.Definition #当前文件夹
