@@ -4,6 +4,9 @@
 #用前备份
 $type = Read-Host "Choose 0 or 1 //Android[0] UWP[1]"
 $currentPath=Split-Path -Parent $MyInvocation.MyCommand.Definition #当前文件夹
+$foo =($currentPath).Split('\\') 
+$av=$foo[$foo.Count-1] #av号
+
 if($type -eq "0")
 {
     Get-ChildItem -Filter *.blv -Recurse |
@@ -41,18 +44,19 @@ else
     Get-ChildItem -Filter *.flv -Recurse |
     ForEach-Object{
         cd $_.DirectoryName
-        $newName = 'av{0}' -f $_.Name
-        Rename-Item -Path $_.FullName -NewName $newName
-        Move-Item $newName -Destination ../
+        Out-File -FilePath filelist.txt -Append -Encoding ASCII -InputObject "file $_" 
     }
+
     cd $currentPath
-    Get-ChildItem -Filter *.xml -Recurse |
+
+    Get-ChildItem -Filter *.txt -Recurse |
     ForEach-Object{
-       $newName = 'av{0}' -f $_.Name
-       cd $_.DirectoryName
-       Rename-Item -Path $_.FullName -NewName $newName
-       Move-Item $newName -Destination ../
+        $bar=($_.DirectoryName).Split('\\')
+        $partNumber=$bar[$bar.Count-1] #分p号
+        $file='av{0}-p{1}.mkv' -f $av,$partNumber
+        cd $_.DirectoryName
+        ffmpeg -f concat -i filelist.txt -c copy "$file"
     }
     cd $currentPath
-    Remove-Item ./* -Exclude *.flv,*.xml,*.ps1 -Recurse #删掉其他文件
+    Remove-Item ./* -Exclude *.xml,*.ps1,*.jpg,*.mkv -Recurse #删掉其他文件
 }
